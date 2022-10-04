@@ -7,9 +7,16 @@ requirements = []
 boot_contracts = ["pox", "costs-v2", "bns"]
 
 [project.cache_location]
-path = ".\\.requirements"
+path = ".requirements"
 [contracts.main]
 path = "contracts/main.clar"
+
+[contracts.sip-010-trait]
+path = "contracts/sip-010-trait.clar"
+
+[contracts.vibes-token]
+path = "contracts/vibes-token.clar"
+depends_on = ["sip-010-trait"]
 
 [repl]
 costs_version = 2
