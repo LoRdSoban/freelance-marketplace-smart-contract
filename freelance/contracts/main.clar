@@ -50,6 +50,23 @@
         (hv-fee (/ (* amount percentage) u100))
         (total-amount (+ hv-fee amount))
     ) 
+
+    (try! (transfer-stx-to-escrow amount))
+    (map-set jobs {job-id: job-id} {amount: total-amount, freelancer-wallet: freelancer-wallet, vibes: false})
+    (ok true)
+)
+)
+
+(define-public (add-job-in-vibes (job-id uint) (amount uint) (freelancer-wallet (optional principal)) ) 
+
+(let 
+    (
+        (percentage (var-get vibes-percentage))
+        (hv-fee (/ (* amount percentage) u100))
+        (total-amount (+ hv-fee amount))
+    ) 
+
+    (try! (transfer-vibes-to-escrow total-amount))
     (map-set jobs {job-id: job-id} {amount: total-amount, freelancer-wallet: freelancer-wallet, vibes: false})
     (ok true)
 )
