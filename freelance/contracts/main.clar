@@ -16,7 +16,7 @@
 ;; -> escrow is released to freelancer
 
 ;; constants
-;;
+
 
 ;; data maps and vars
 
@@ -26,6 +26,7 @@
 (define-data-var vibes-percentage uint u3)
 
 (define-constant contract-address (as-contract tx-sender))
+
 ;; private functions
 ;;
 (define-private (transfer-stx-to-escrow (amount uint)) 
