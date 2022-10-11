@@ -1,6 +1,7 @@
 
 ;; main
-;; ;; Freelance smart contrac
+;; ;; Freelance smart contract
+
 ;; Jobs {job_id: uint} {amount: uint, freelancer_wallet: (optional principal), vibes: bool} 
 
 ;; Add job in stx( job id, amount, optional freelancer address)
