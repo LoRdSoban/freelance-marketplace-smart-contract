@@ -9,7 +9,7 @@
 (define-data-var token-uri (optional (string-utf8 256)) none)
 (define-data-var total-supply uint u0)
 (define-map allowances {spender: principal, owner: principal} uint)
-(impl-trait .sip-010-trait.sip-010-trait)
+(impl-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
 
 
 (define-read-only (get-name)

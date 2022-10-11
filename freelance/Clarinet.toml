@@ -1,29 +1,21 @@
 [project]
-name = "freelance"
+name = 'freelance'
+description = ''
 authors = []
-description = ""
 telemetry = false
-requirements = []
-boot_contracts = ["pox", "costs-v2", "bns"]
+cache_dir = '.\.cache'
 
-[project.cache_location]
-path = ".requirements"
+[[project.requirements]]
+contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
 [contracts.main]
-path = "contracts/main.clar"
-
-[contracts.sip-010-trait]
-path = "contracts/sip-010-trait.clar"
+path = 'contracts/main.clar'
+clarity_version = 1
 
 [contracts.vibes-token]
-path = "contracts/vibes-token.clar"
-depends_on = ["sip-010-trait"]
-
-[repl]
-costs_version = 2
-parser_version = 2
-
+path = 'contracts/vibes-token.clar'
+clarity_version = 1
 [repl.analysis]
-passes = ["check_checker"]
+passes = ['check_checker']
 
 [repl.analysis.check_checker]
 strict = false

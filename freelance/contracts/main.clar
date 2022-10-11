@@ -1,5 +1,20 @@
 
 ;; main
+;; <add a description here>
+
+;; constants
+;;
+
+;; data maps and vars
+;;
+
+;; private functions
+;;
+
+;; public functions
+;;
+
+;; main
 ;; ;; Freelance smart contract
 
 ;; Jobs {job_id: uint} {amount: uint, freelancer_wallet: (optional principal), vibes: bool} 
@@ -51,7 +66,7 @@
         (percentage (var-get stx-percentage))
         (hv-fee (/ (* amount percentage) u100))
         (total-amount (+ hv-fee amount))
-    ) 
+    )
 
     (try! (transfer-stx-to-escrow amount))
     (map-set jobs {job-id: job-id} {amount: total-amount, freelancer-wallet: freelancer-wallet, vibes: false})
@@ -66,10 +81,10 @@
         (percentage (var-get vibes-percentage))
         (hv-fee (/ (* amount percentage) u100))
         (total-amount (+ hv-fee amount))
-    ) 
+    )  
 
     (try! (transfer-vibes-to-escrow total-amount))
-    (map-set jobs {job-id: job-id} {amount: total-amount, freelancer-wallet: freelancer-wallet, vibes: false})
+    (map-set jobs {job-id: job-id} {amount: total-amount, freelancer-wallet: freelancer-wallet, vibes: true})
     (ok true)
 )
 )
