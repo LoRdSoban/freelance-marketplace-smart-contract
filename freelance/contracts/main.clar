@@ -27,6 +27,8 @@
 ;; -> freelancer wallet must be present 
 ;;       - > otherwise, error
 
+;; add freelancer wallet 
+
 ;; Approve job (hirevibes) (job id) 
 ;; -> must be approved by client first 
 ;; -> escrow is released to freelancer
@@ -40,6 +42,7 @@
 
 (define-data-var stx-percentage uint u5)
 (define-data-var vibes-percentage uint u3)
+(define-data-var owner principal 'STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6)
 
 (define-constant contract-address (as-contract tx-sender))
 
@@ -67,6 +70,7 @@
         (hv-fee (/ (* amount percentage) u100))
         (total-amount (+ hv-fee amount))
     )
+    (asserts! (is-none (map-get? jobs {job-id: job-id})) (err u100)) ;; execution only continues if data doesn't already exists
 
     (try! (transfer-stx-to-escrow amount))
     (map-set jobs {job-id: job-id} {amount: total-amount, freelancer-wallet: freelancer-wallet, vibes: false})
@@ -81,10 +85,39 @@
         (percentage (var-get vibes-percentage))
         (hv-fee (/ (* amount percentage) u100))
         (total-amount (+ hv-fee amount))
-    )  
+    )
 
     (try! (transfer-vibes-to-escrow total-amount))
     (map-set jobs {job-id: job-id} {amount: total-amount, freelancer-wallet: freelancer-wallet, vibes: true})
     (ok true)
 )
+)
+
+
+(define-public (add-freelancer-wallet (job-id uint) (freelancer-wallet (optional principal)) ) 
+
+(let 
+    (
+        (amount (get amount (unwrap! (map-get? jobs {job-id: job-id}) (err u1) )) )
+        (vibes (get vibes (unwrap! (map-get? jobs {job-id: job-id}) (err u1) )) )
+
+    ) 
+    ;; check if wallet already exists
+    (asserts! (is-none (get freelancer-wallet (unwrap! (map-get? jobs {job-id: job-id}) (err u1) ))) (err u0))
+
+    (map-set jobs {job-id: job-id} {amount: amount, freelancer-wallet: freelancer-wallet, vibes: vibes})
+    (ok true)
+)
+)
+
+(define-public (change-stx-percentage (val uint)) 
+
+    (ok (var-set stx-percentage val))
+
+)
+
+(define-public (change-vibes-percentage (val uint)) 
+
+    (ok (var-set vibes-percentage val))
+
 )
