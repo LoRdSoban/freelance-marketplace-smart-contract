@@ -1,20 +1,5 @@
 
 ;; main
-;; <add a description here>
-
-;; constants
-;;
-
-;; data maps and vars
-;;
-
-;; private functions
-;;
-
-;; public functions
-;;
-
-;; main
 ;; ;; Freelance smart contract
 
 ;; Jobs {job_id: uint} {amount: uint, freelancer_wallet: (optional principal), vibes: bool} 
